@@ -13,7 +13,7 @@ git clone https://github.com/BugLight/my-nvim-config.git ~/.config/nvim
 
 ### Windows
 ```
-git clone "$env:LOCALAPPDATA/nvim"
+git clone https://github.com/BugLight/my-nvim-config.git "$env:LOCALAPPDATA/nvim"
 ```
 
 
