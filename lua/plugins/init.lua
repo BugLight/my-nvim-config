@@ -15,6 +15,7 @@ vim.cmd [[
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nvim-lua/plenary.nvim'
+    use 'gpanders/editorconfig.nvim'
     use 'williamboman/nvim-lsp-installer'
 
     use {
