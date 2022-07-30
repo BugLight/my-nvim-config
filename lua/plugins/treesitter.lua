@@ -4,6 +4,9 @@ require('nvim-treesitter.configs').setup {
         "cpp",
         "python",
         "lua",
+        "javascript",
+        "html",
+        "vue",
     },
     highlight = {
         enable = true,

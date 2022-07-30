@@ -29,3 +29,18 @@ lspconfig.texlab.setup {
     capabilities = capabilities
 }
 
+-- JS
+lspconfig.eslint.setup {
+    capabilities = capabilities
+}
+
+-- HTML
+lspconfig.html.setup {
+    capabilities = capabilities
+}
+
+-- Vue.js
+lspconfig.vuels.setup {
+    capabilities = capabilities
+}
+
