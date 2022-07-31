@@ -2,7 +2,7 @@ local db = require('dashboard')
 local home = os.getenv('HOME')
 
 db.session_directory = home .. '/.sessions'
-db.preview_command = 'cat'
+db.preview_command = 'cat | cat'
 db.preview_file_path = home .. '/.splash'
 db.preview_file_height = 13
 db.preview_file_width = 102
