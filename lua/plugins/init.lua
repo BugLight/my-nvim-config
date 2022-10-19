@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
  
     use {
         'hrsh7th/nvim-cmp',
+        requires = { 'onsails/lspkind.nvim' },
         event = 'InsertEnter',
         config = function()
             require 'plugins.cmp'

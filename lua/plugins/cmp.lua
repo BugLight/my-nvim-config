@@ -1,4 +1,5 @@
-local cmp = require 'cmp'
+local cmp = require('cmp')
+local lspkind = require('lspkind')
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -33,6 +34,9 @@ cmp.setup {
             cmp.config.compare.length,
             cmp.config.compare.order,
         },
+    },
+    formatting = {
+        format = lspkind.cmp_format()
     },
 }
 
