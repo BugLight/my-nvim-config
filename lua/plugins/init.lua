@@ -102,7 +102,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         after = 'tokyonight.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        requires = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require 'plugins.lualine'
         end
@@ -122,7 +122,9 @@ return require('packer').startup(function(use)
     }
  
     use {
-        'kyazdani42/nvim-tree.lua',
+        'nvim-tree/nvim-tree.lua',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        tag = 'nightly',
         cmd = { 'NvimTreeOpen', 'NvimTreeFocus', 'NvimTreeToggle' },
         config = function()
             require 'plugins.tree'
