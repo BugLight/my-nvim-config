@@ -164,6 +164,14 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        'numToStr/Comment.nvim',
+        event = 'BufRead',
+        config = function()
+            require 'plugins.comment'
+        end
+    }
+
     if packer_bootstrap then
         require('packer').sync()
     end
