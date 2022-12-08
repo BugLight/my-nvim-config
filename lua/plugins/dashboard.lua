@@ -31,7 +31,7 @@ db.custom_center = {
     {
         icon = '勒  ',
         desc = 'Load Last Session',
-        action = 'SessionLoad'
+        action = 'SessionLoad\nNvimTreeOpen'
     }
 }
 
