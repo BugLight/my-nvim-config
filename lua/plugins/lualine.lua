@@ -1,6 +1,6 @@
 require('lualine').setup {
     options = {
-        theme = 'tokyonight',
+        theme = 'catppuccin',
     },
     extensions = {
         'nvim-tree',

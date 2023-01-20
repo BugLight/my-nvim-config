@@ -63,7 +63,8 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'folke/tokyonight.nvim',
+        'catppuccin/nvim',
+        as = 'catppuccin',
         event = 'UIEnter',
         config = function()
             require 'theme'
@@ -81,7 +82,7 @@ return require('packer').startup(function(use)
  
     use {
         'nvim-lualine/lualine.nvim',
-        after = 'tokyonight.nvim',
+        after = 'catppuccin',
         requires = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require 'plugins.lualine'
@@ -113,7 +114,7 @@ return require('packer').startup(function(use)
  
     use {
         'lukas-reineke/indent-blankline.nvim',
-        after = 'tokyonight.nvim',
+        after = 'catppuccin',
         config = function()
             require 'plugins.indent'
         end
@@ -130,7 +131,7 @@ return require('packer').startup(function(use)
  
     use {
         'akinsho/bufferline.nvim',
-        after = 'tokyonight.nvim',
+        after = 'catppuccin',
         config = function()
             require 'plugins.bufferline'
         end
