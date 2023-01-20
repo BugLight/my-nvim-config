@@ -13,6 +13,7 @@ vim.o.wildmode = 'longest,list'
 vim.o.cc = 80
 vim.o.clipboard = 'unnamedplus'
 vim.o.ttyfast = true
+vim.o.lazyredraw = true
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.tgc = true
 
