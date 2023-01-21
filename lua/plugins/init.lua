@@ -131,6 +131,7 @@ return require('packer').startup(function(use)
  
     use {
         'akinsho/bufferline.nvim',
+        tag = 'v3.*',
         after = 'catppuccin',
         config = function()
             require 'plugins.bufferline'
