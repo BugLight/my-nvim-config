@@ -153,6 +153,13 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        'tiagovla/scope.nvim',
+        config = function()
+            require('scope').setup()
+        end
+    }
+
     if packer_bootstrap then
         require('packer').sync()
     end
