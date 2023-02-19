@@ -3,6 +3,7 @@ vim.g.coq_settings = {
     ['display.pum.fast_close'] = false,
     clients = {
         ['lsp.weight_adjust'] = 2,
+        ['tabnine.enabled'] = true,
     },
 }
 
