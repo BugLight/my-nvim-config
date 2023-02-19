@@ -1,42 +1,48 @@
-local db = require('dashboard')
-local home = os.getenv('HOME')
-
-db.session_directory = home .. '/.sessions'
-db.preview_command = 'cat | cat'
-db.preview_file_path = home .. '/.splash'
-db.preview_file_height = 13
-db.preview_file_width = 102
-
-db.custom_center = {
-    {
-        icon = '  ',
-        desc = 'New File',
-        action = 'DashboardNewFile'
+require('dashboard').setup {
+    theme = 'doom',
+    config = {
+        center = {
+            {
+                icon = '  ',
+                icon_hl = 'Title',
+                desc = 'New File',
+                desc_hl = 'Title',
+                action = 'enew'
+            },
+            {
+                icon = '  ',
+                icon_hl = 'Title',
+                desc = 'Old Files',
+                desc_hl = 'Title',
+                action = 'Telescope oldfiles'
+            },
+            {
+                icon = '  ',
+                icon_hl = 'Title',
+                desc = 'Find File',
+                desc_hl = 'Title',
+                action = 'Telescope find_files'
+            },
+            {
+                icon = '  ',
+                icon_hl = 'Title',
+                desc = 'Live Grep',
+                desc_hl = 'Title',
+                action = 'Telescope live_grep'
+            },
+            {
+                icon = '勒 ',
+                icon_hl = 'Title',
+                desc = 'Load Last Session',
+                desc_hl = 'Title',
+                action = 'SessionLoad'
+            },
+        },
     },
-    {
-        icon = '  ',
-        desc = 'Old Files',
-        action = 'Telescope oldfiles'
+    preview = {
+        command = 'bash -c "cat $HOME/.splash"',
+        file_path = '',
+        file_height = 20,
+        file_width = 102,
     },
-    {
-        icon = '  ',
-        desc = 'Find File',
-        action = 'Telescope find_files'
-    },
-    {
-        icon = '  ',
-        desc = 'Live Grep',
-        action = 'Telescope live_grep'
-    },
-    {
-        icon = '勒  ',
-        desc = 'Load Last Session',
-        action = 'SessionLoad\nNvimTreeOpen'
-    }
 }
-
-vim.cmd [[
-augroup dashboard
-autocmd VimLeavePre * SessionSave
-augroup end
-]]

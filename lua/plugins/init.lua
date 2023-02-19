@@ -146,6 +146,15 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'glepnir/dbsession.nvim',
+        config = function()
+            require('dbsession').setup {
+                auto_save_on_exit = true,
+            }
+        end
+    }
+
+    use {
         'numToStr/Comment.nvim',
         event = 'BufRead',
         config = function()
