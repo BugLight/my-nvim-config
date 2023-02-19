@@ -1,6 +1,9 @@
 vim.g.coq_settings = {
     auto_start = 'shut-up',
     ['display.pum.fast_close'] = false,
+    clients = {
+        ['lsp.weight_adjust'] = 2,
+    },
 }
 
 require('nvim-lsp-installer').setup { automatic_installation = true }
