@@ -22,22 +22,29 @@ end
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-    use 'nvim-lua/plenary.nvim'
     use 'gpanders/editorconfig.nvim'
 
     use {
+        'williamboman/mason.nvim',
+        requires ={
+            'williamboman/mason-lspconfig.nvim',
+        },
+        config = function()
+            require 'plugins.mason'
+        end
+    }
+
+    use {
         'neovim/nvim-lspconfig',
+        after = 'mason.nvim',
         requires = {
             {
                 'ms-jpq/coq_nvim',
-                run = 'python3 -m coq deps',
+                run = ':COQdeps',
                 requires = {
                     'ms-jpq/coq.artifacts',
                     'ms-jpq/coq.thirdparty',
                 },
-            },
-            {
-                'williamboman/nvim-lsp-installer'
             },
         },
         config = function()
@@ -73,7 +80,7 @@ return require('packer').startup(function(use)
  
     use {
         'p00f/clangd_extensions.nvim',
-        wants = 'nvim-lspconfig',
+        after = 'nvim-lspconfig',
         ft = { 'c', 'cpp', 'h' },
         config = function()
             require 'plugins.clangd_extensions'
@@ -91,7 +98,7 @@ return require('packer').startup(function(use)
  
     use {
         'lewis6991/gitsigns.nvim',
-        after = 'plenary.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
         config = function()
             require 'plugins.gitsigns'
         end

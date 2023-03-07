@@ -7,8 +7,6 @@ vim.g.coq_settings = {
     },
 }
 
-require('nvim-lsp-installer').setup { automatic_installation = true }
-
 local lspconfig = require('lspconfig')
 local coq = require('coq')
 
