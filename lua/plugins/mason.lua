@@ -1,6 +1,8 @@
 require('mason').setup()
 
+local lsp = require('lsp')
+
 require('mason-lspconfig').setup {
-    automatic_installation = true,
+    ensure_installed = lsp.server_names,
 }
 

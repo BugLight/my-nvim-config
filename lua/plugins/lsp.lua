@@ -10,36 +10,9 @@ vim.g.coq_settings = {
 local lspconfig = require('lspconfig')
 local coq = require('coq')
 
-local servers = {
-    {
-        'cmake',
-        {
-            init_options = {
-                buildDirectory = 'build'
-            }
-        }
-    },
-    {
-        'pyright',
-        {
-            settings = {
-                python = {
-                    venvPath = '.',
-                    analysis = {
-                        diagnosticMode = 'workspace',
-                        useLibraryCodeForTypes = true
-                    }
-                }
-            }
-        }
-    },
-    'texlab',
-    'eslint',
-    'html',
-    'vuels',
-}
+local lsp = require('lsp')
 
-for _, server in ipairs(servers) do
+for _, server in ipairs(lsp.server_settings) do
     if type(server) == 'table' then
         settings = server[2]
         server = server[1]
