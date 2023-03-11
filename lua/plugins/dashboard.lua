@@ -7,7 +7,7 @@ require('dashboard').setup {
                 icon_hl = 'Title',
                 desc = 'New File',
                 desc_hl = 'Title',
-                action = 'enew'
+                action = 'enew\nNvimTreeToggle'
             },
             {
                 icon = '  ',
@@ -35,7 +35,7 @@ require('dashboard').setup {
                 icon_hl = 'Title',
                 desc = 'Load Last Session',
                 desc_hl = 'Title',
-                action = 'SessionLoad'
+                action = 'RestoreSession\nNvimTreeToggle'
             },
         },
     },

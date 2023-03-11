@@ -153,11 +153,9 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'glepnir/dbsession.nvim',
+        'rmagatti/auto-session',
         config = function()
-            require('dbsession').setup {
-                auto_save_on_exit = true,
-            }
+            require 'plugins.session'
         end
     }
 
