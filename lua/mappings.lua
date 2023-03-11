@@ -12,7 +12,13 @@ vim.api.nvim_set_keymap('', '<C-k>', '<CMD>BufferLineCyclePrev<CR>', { noremap =
 vim.api.nvim_set_keymap('', '<C-t>', '<CMD>ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- substitute
-vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "S", "<cmd>lua require('substitute').eol()<cr>", { noremap = true, silent = true })
-vim.keymap.set("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true, silent = true })
+vim.keymap.set('n', 's', '<cmd>lua require(\'substitute\').operator()<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'ss', '<cmd>lua require(\'substitute\').line()<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'S', '<cmd>lua require(\'substitute\').eol()<cr>', { noremap = true, silent = true })
+vim.keymap.set('x', 's', '<cmd>lua require(\'substitute\').visual()<cr>', { noremap = true, silent = true })
+
+-- lspsaga
+vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>')
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>')
+vim.keymap.set('n','gd', '<cmd>Lspsaga goto_definition<CR>')
+

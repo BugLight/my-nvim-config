@@ -53,6 +53,19 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'glepnir/lspsaga.nvim',
+        after = 'nvim-lspconfig',
+        branch = 'main',
+        config = function()
+            require('lspsaga').setup {}
+        end,
+        requires = {
+            {'nvim-tree/nvim-web-devicons'},
+            {'nvim-treesitter/nvim-treesitter'}
+        }
+    }
+
+    use {
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
         config = function()
@@ -175,7 +188,7 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "gbprod/substitute.nvim",
+        'gbprod/substitute.nvim',
         config = function()
             require 'plugins.substitute'
         end
