@@ -176,6 +176,13 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        "gbprod/substitute.nvim",
+        config = function()
+            require 'plugins.substitute'
+        end
+    }
+
     if packer_bootstrap then
         require('packer').sync()
     end
