@@ -1,16 +1,28 @@
-vim.g.coq_settings = {
-    auto_start = 'shut-up',
-    ['display.pum.fast_close'] = false,
-    clients = {
-        ['lsp.weight_adjust'] = 2,
-        ['tabnine.enabled'] = true,
+local lspconfig = require('lspconfig')
+local cmp = require('cmp')
+
+cmp.setup {
+    snippet = {
+        expand = function (args)
+            require('luasnip').lsp_expand(args.body)
+        end,
     },
+    window = {
+    },
+    mapping = cmp.mapping.preset.insert {
+        ['<Tab>'] = cmp.mapping.select_next_item {},
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+    }, {
+        { name = 'buffer' },
+    }),
 }
 
-local lspconfig = require('lspconfig')
-local coq = require('coq')
-
 local lsp = require('lsp')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, server in ipairs(lsp.server_settings) do
     if type(server) == 'table' then
@@ -19,6 +31,9 @@ for _, server in ipairs(lsp.server_settings) do
     else
         settings = {}
     end
-    lspconfig[server].setup(coq.lsp_ensure_capabilities(settings))
+    lspconfig[server].setup {
+        settings=settings,
+        capabilities = capabilities,
+    }
 end
 

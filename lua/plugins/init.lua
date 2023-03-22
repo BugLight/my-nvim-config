@@ -38,14 +38,13 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         after = 'mason.nvim',
         requires = {
-            {
-                'ms-jpq/coq_nvim',
-                run = ':COQdeps',
-                requires = {
-                    'ms-jpq/coq.artifacts',
-                    'ms-jpq/coq.thirdparty',
-                },
-            },
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
         },
         config = function()
             require 'plugins.lsp'
@@ -60,8 +59,8 @@ return require('packer').startup(function(use)
             require('lspsaga').setup {}
         end,
         requires = {
-            {'nvim-tree/nvim-web-devicons'},
-            {'nvim-treesitter/nvim-treesitter'}
+            'nvim-tree/nvim-web-devicons',
+            'nvim-treesitter/nvim-treesitter',
         }
     }
 
