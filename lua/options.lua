@@ -16,4 +16,6 @@ vim.o.ttyfast = true
 vim.o.lazyredraw = true
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.tgc = true
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 

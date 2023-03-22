@@ -19,6 +19,7 @@ vim.keymap.set('x', 's', '<cmd>lua require(\'substitute\').visual()<cr>', { nore
 
 -- lspsaga
 vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>')
-vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>')
 vim.keymap.set('n','gd', '<cmd>Lspsaga goto_definition<CR>')
 
+vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>')
+vim.keymap.set('n', '<leader>r', '<cmd>Lspsaga rename<CR>')
