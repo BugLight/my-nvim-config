@@ -46,6 +46,11 @@ return require('packer').startup(function(use)
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'folke/neodev.nvim',
+            {
+                'tzachar/cmp-tabnine',
+                run='./install.sh',
+                requires = 'hrsh7th/nvim-cmp'
+            }
         },
         config = function()
             require 'plugins.lsp'
