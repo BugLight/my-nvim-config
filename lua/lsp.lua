@@ -28,6 +28,7 @@ module.server_settings = {
     'html',
     'vuels',
     'rust_analyzer',
+    'lua_ls',
 }
 
 module.server_names = {}

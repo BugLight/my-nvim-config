@@ -1,3 +1,4 @@
+require('neodev').setup {}
 local lspconfig = require('lspconfig')
 local cmp = require('cmp')
 
@@ -25,13 +26,15 @@ local lsp = require('lsp')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, server in ipairs(lsp.server_settings) do
+    local settings = {}
+    local name
     if type(server) == 'table' then
         settings = server[2]
-        server = server[1]
+        name = server[1]
     else
-        settings = {}
+        name = server
     end
-    lspconfig[server].setup {
+    lspconfig[name].setup {
         settings=settings,
         capabilities = capabilities,
     }
