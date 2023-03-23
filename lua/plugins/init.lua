@@ -25,6 +25,13 @@ return require('packer').startup(function(use)
     use 'gpanders/editorconfig.nvim'
 
     use {
+        'lewis6991/impatient.nvim',
+        config = function()
+            require 'impatient'
+        end
+    }
+
+    use {
         'williamboman/mason.nvim',
         requires ={
             'williamboman/mason-lspconfig.nvim',
