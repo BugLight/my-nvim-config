@@ -44,13 +44,15 @@ return require('packer').startup(function(use)
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'L3MON4D3/LuaSnip',
+            'rafamadriz/friendly-snippets',
             'saadparwaiz1/cmp_luasnip',
             'folke/neodev.nvim',
             {
                 'tzachar/cmp-tabnine',
                 run='./install.sh',
                 requires = 'hrsh7th/nvim-cmp'
-            }
+            },
+            'onsails/lspkind.nvim',
         },
         config = function()
             require 'plugins.lsp'
@@ -124,7 +126,10 @@ return require('packer').startup(function(use)
  
     use {
         'ray-x/lsp_signature.nvim',
-        after = 'nvim-lspconfig'
+        after = 'nvim-lspconfig',
+        config = function()
+            require('lsp_signature').setup {}
+        end
     }
  
     use {
