@@ -1,8 +1,9 @@
 -- nvim-tree
-vim.api.nvim_set_keymap('', '<C-n>', '<CMD>NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<C-w>n', '<CMD>NvimTreeFocus<CR>', { noremap = true, silent = true })
 
 -- telescope
-vim.api.nvim_set_keymap('', '<C-f>', '<CMD>Telescope live_grep<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<leader>ff', '<CMD>Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<leader>fg', '<CMD>Telescope live_grep<CR>', { noremap = true, silent = true })
 
 -- bufferline
 vim.api.nvim_set_keymap('', '<C-j>', '<CMD>BufferLineCycleNext<CR>', { noremap = true, silent = true })
