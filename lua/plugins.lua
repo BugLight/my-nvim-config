@@ -18,12 +18,16 @@ for _, plugin in pairs(disabled_builtins) do
     vim.g['loaded_' .. plugin] = 1
 end
 
-
-
 return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use 'gpanders/editorconfig.nvim'
+    ---------------------------- Required plugins -----------------------------
 
+    -- The packer itself
+    use { 'wbthomason/packer.nvim' }
+
+    -- Use local .editorconfig files
+    use { 'gpanders/editorconfig.nvim' }
+
+    -- Faster startup
     use {
         'lewis6991/impatient.nvim',
         config = function()
@@ -31,21 +35,59 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- One click substitute
     use {
-        'williamboman/mason.nvim',
-        requires ={
-            'williamboman/mason-lspconfig.nvim',
-        },
+        'gbprod/substitute.nvim',
+        config = require 'config.substitute'
+    }
+
+    -- Tabs don't share buffers
+    use {
+        'tiagovla/scope.nvim',
         config = function()
-            require 'plugins.mason'
+            require('scope').setup()
         end
     }
 
+    -- Save and load session functionality
     use {
-        'neovim/nvim-lspconfig',
-        after = 'mason.nvim',
+        'rmagatti/auto-session',
+        config = require 'config.session'
+    }
+
+    -- Greeting screen
+    use {
+        'goolord/alpha-nvim',
+        config = require 'config.alpha'
+    }
+
+    -- Auto install lsp servers
+    use {
+        'williamboman/mason.nvim',
+        requires = {
+            'williamboman/mason-lspconfig.nvim',
+        },
+        run = ':MasonUpdate',
+        config = require 'config.mason'
+    }
+
+    -- Vim config completions
+    use { 'folke/neodev.nvim' }
+
+    -- AI completions
+    use {
+        'tzachar/cmp-tabnine',
+        run='./install.sh',
         requires = {
             'hrsh7th/nvim-cmp',
+        }
+    }
+
+    -- Completion plugin
+    use {
+        'hrsh7th/nvim-cmp',
+        after = 'cmp-tabnine',
+        requires = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
@@ -53,84 +95,91 @@ return require('packer').startup(function(use)
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',
             'saadparwaiz1/cmp_luasnip',
-            'folke/neodev.nvim',
-            {
-                'tzachar/cmp-tabnine',
-                run='./install.sh',
-                requires = 'hrsh7th/nvim-cmp'
-            },
             'onsails/lspkind.nvim',
         },
-        config = function()
-            require 'plugins.lsp'
-        end
+        config = require 'config.cmp'
+    }
+
+    -- LSP config
+    use {
+        'neovim/nvim-lspconfig',
+        after = {
+            'mason.nvim',
+            'nvim-cmp',
+        },
+        config = require 'config.lspconfig'
     }
 
     use {
         'glepnir/lspsaga.nvim',
         after = 'nvim-lspconfig',
         branch = 'main',
-        config = function()
-            require('lspsaga').setup {}
-        end,
         requires = {
             'nvim-tree/nvim-web-devicons',
             'nvim-treesitter/nvim-treesitter',
-        }
-    }
-
-    use {
-        'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
+        },
         config = function()
-            require 'plugins.telescope'
+            require('lspsaga').setup {}
         end
     }
 
+    -- Files and directories tree
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        tag = 'nightly',
+        config = require 'config.tree'
+    }
+
+    ------------------------------ Lazy plugins -------------------------------
+
+    -- Fuzzy search
+    use {
+        'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
+        config = require 'config.telescope'
+    }
+
+    -- Terminal
     use {
         'akinsho/toggleterm.nvim',
         tag = 'v2.*',
         cmd = 'ToggleTerm',
-        config = function()
-            require 'plugins.toggleterm'
-        end
+        config = require 'config.toggleterm'
     }
 
+    -- Theme
     use {
         'catppuccin/nvim',
-        as = 'catppuccin',
+        as = 'theme',
         event = 'UIEnter',
-        config = function()
-            require 'theme'
-        end
+        config = require 'config.theme'
     }
- 
+
+    -- Better LSP experience for C/C++
     use {
         'p00f/clangd_extensions.nvim',
         after = 'nvim-lspconfig',
         ft = { 'c', 'cpp', 'h' },
-        config = function()
-            require 'plugins.clangd_extensions'
-        end
+        config = require 'config.clangd_extensions'
     }
- 
+
+    -- Status line
     use {
         'nvim-lualine/lualine.nvim',
-        after = 'catppuccin',
+        after = 'theme',
         requires = { 'nvim-tree/nvim-web-devicons' },
-        config = function()
-            require 'plugins.lualine'
-        end
+        config = require 'config.lualine'
     }
- 
+
+    -- Git integration
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require 'plugins.gitsigns'
-        end
+        config = require 'config.gitsigns'
     }
- 
+
+    -- Show functions signatures
     use {
         'ray-x/lsp_signature.nvim',
         after = 'nvim-lspconfig',
@@ -138,25 +187,15 @@ return require('packer').startup(function(use)
             require('lsp_signature').setup {}
         end
     }
- 
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = { 'nvim-tree/nvim-web-devicons' },
-        tag = 'nightly',
-        cmd = { 'NvimTreeOpen', 'NvimTreeFocus', 'NvimTreeToggle' },
-        config = function()
-            require 'plugins.tree'
-        end
-    }
- 
+
+    -- Visual indents
     use {
         'lukas-reineke/indent-blankline.nvim',
-        after = 'catppuccin',
-        config = function()
-            require 'plugins.indent'
-        end
+        after = 'theme',
+        config = require 'config.indent'
     }
- 
+
+    -- Treesitter syntax highlighting
     use {
         'nvim-treesitter/nvim-treesitter',
         requires = {
@@ -165,52 +204,24 @@ return require('packer').startup(function(use)
         },
         run = ':TSUpdate',
         config = function()
-            require 'plugins.treesitter'
+            require 'config.treesitter'
         end
     }
 
+    -- Switch between buffers
     use {
         'akinsho/bufferline.nvim',
         tag = 'v3.*',
-        after = 'catppuccin',
-        config = function()
-            require 'plugins.bufferline'
-        end
-    }
- 
-    use {
-        'glepnir/dashboard-nvim',
-        config = function()
-            require 'plugins.dashboard'
-        end
+        after = 'theme',
+        config = require 'config.bufferline'
     }
 
-    use {
-        'rmagatti/auto-session',
-        config = function()
-            require 'plugins.session'
-        end
-    }
-
+    -- Comment/uncomment commands
     use {
         'numToStr/Comment.nvim',
         event = 'BufRead',
         config = function()
-            require 'plugins.comment'
-        end
-    }
-
-    use {
-        'tiagovla/scope.nvim',
-        config = function()
-            require('scope').setup()
-        end
-    }
-
-    use {
-        'gbprod/substitute.nvim',
-        config = function()
-            require 'plugins.substitute'
+            require('Comment').setup()
         end
     }
 
