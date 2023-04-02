@@ -105,6 +105,17 @@ return require('packer').startup {
             config = require 'config.lspconfig'
         }
 
+        -- Git integration
+
+        use { 'tpope/vim-fugitive' }
+
+        use {
+            'lewis6991/gitsigns.nvim',
+            after = 'vim-fugitive',
+            requires = { 'nvim-lua/plenary.nvim' },
+            config = require 'config.gitsigns'
+        }
+
         -- Files and directories tree
         use {
             'nvim-tree/nvim-tree.lua',
@@ -166,13 +177,6 @@ return require('packer').startup {
             after = 'theme',
             requires = { 'nvim-tree/nvim-web-devicons' },
             config = require 'config.lualine'
-        }
-
-        -- Git integration
-        use {
-            'lewis6991/gitsigns.nvim',
-            requires = { 'nvim-lua/plenary.nvim' },
-            config = require 'config.gitsigns'
         }
 
         -- Show functions signatures
