@@ -16,7 +16,8 @@ return function ()
         },
         rainbow = {
             enable = true,
-            extended_mode = true,
+            strategy = require('ts-rainbow').strategy['global'],
+            query = 'rainbow-parens',
         },
         textobjects = {
             select = {

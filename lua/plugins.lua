@@ -4,13 +4,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-vim.cmd [[
- packadd packer.nvim
- augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost */nvim/lua/plugins/*.lua source <afile> | PackerCompile
-  augroup end
-]]
+vim.cmd.packadd('packer.nvim')
 
 local disabled_builtins = {}
 
@@ -110,28 +104,29 @@ return require('packer').startup(function(use)
         config = require 'config.lspconfig'
     }
 
-    use {
-        'glepnir/lspsaga.nvim',
-        after = 'nvim-lspconfig',
-        branch = 'main',
-        requires = {
-            'nvim-tree/nvim-web-devicons',
-            'nvim-treesitter/nvim-treesitter',
-        },
-        config = function()
-            require('lspsaga').setup {}
-        end
-    }
-
     -- Files and directories tree
     use {
         'nvim-tree/nvim-tree.lua',
-        requires = { 'nvim-tree/nvim-web-devicons' },
+        requires = {
+            'nvim-tree/nvim-web-devicons'
+        },
         tag = 'nightly',
         config = require 'config.tree'
     }
 
     ------------------------------ Lazy plugins -------------------------------
+
+    use {
+        'glepnir/lspsaga.nvim',
+        event = 'LspAttach',
+        branch = 'main',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function()
+            require('lspsaga').setup {}
+        end
+    }
 
     -- Fuzzy search
     use {
@@ -199,13 +194,11 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         requires = {
-            'p00f/nvim-ts-rainbow',
+            'HiPhish/nvim-ts-rainbow2',
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         run = ':TSUpdate',
-        config = function()
-            require 'config.treesitter'
-        end
+        config = require 'config.treesitter'
     }
 
     -- Switch between buffers
