@@ -11,6 +11,14 @@ return function ()
             end,
         },
         window = {
+            completion = cmp.config.window.bordered {
+                scrollbar = false,
+                winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+            },
+            documentation = cmp.config.window.bordered {
+                scrollbar = false,
+                winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+            },
         },
         mapping = cmp.mapping.preset.insert {
             ['<Tab>'] = cmp.mapping(function (fallback)
