@@ -10,6 +10,7 @@ return function ()
             'vue',
             'markdown',
             'markdown_inline',
+            'rust',
         },
         highlight = {
             enable = true,
