@@ -33,3 +33,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>r', '<CMD>Lspsaga rename<CR>')
 vim.keymap.set('n', '[e', '<CMD>Lspsaga diagnostic_jump_prev<CR>')
 vim.keymap.set('n', ']e', '<CMD>Lspsaga diagnostic_jump_next<CR>')
 
+-- paster (https://github.com/BugLight/paster)
+vim.keymap.set('v', 'P', '<CMD>w !paster<CR>')
+
