@@ -22,6 +22,12 @@ return require('packer').startup {
         -- Use local .editorconfig files
         use { 'gpanders/editorconfig.nvim' }
 
+        -- Discord integration
+        use {
+            'andweeb/presence.nvim',
+            config = require 'config.presence'
+        }
+
         -- Faster startup
         use {
             'lewis6991/impatient.nvim',
