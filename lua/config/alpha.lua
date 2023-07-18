@@ -71,7 +71,7 @@ return function ()
                     val = tostring(i) .. '\t' .. session.display_name,
                     on_press = function ()
                         autosession.RestoreSession(session_path)
-                        require('nvim-tree').open()
+                        require('nvim-tree.api').tree.open()
                     end,
                     opts = {
                         keymap = { 'n', sc, ':RestoreSession ' .. session_path .. '<CR>', {} },

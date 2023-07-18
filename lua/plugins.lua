@@ -1,10 +1,15 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    })
 end
-
-vim.cmd.packadd('packer.nvim')
+vim.opt.rtp:prepend(lazypath)
 
 local disabled_builtins = {}
 
@@ -12,234 +17,188 @@ for _, plugin in pairs(disabled_builtins) do
     vim.g['loaded_' .. plugin] = 1
 end
 
-return require('packer').startup {
-    function(use)
-        -------------------------- Required plugins ---------------------------
+require('lazy').setup({
+    -------------------------- Required plugins ---------------------------
 
-        -- The packer itself
-        use { 'wbthomason/packer.nvim' }
+    -- Theme
+    {
+        'catppuccin/nvim',
+        lazy = false,
+        priority = 1000,
+        config = require 'config.theme'
+    },
 
-        -- Use local .editorconfig files
-        use { 'gpanders/editorconfig.nvim' }
+    -- Discord integration
+    {
+        'andweeb/presence.nvim',
+        config = require 'config.presence'
+    },
 
-        -- Discord integration
-        use {
-            'andweeb/presence.nvim',
-            config = require 'config.presence'
-        }
+    -- One click substitute
+    {
+        'gbprod/substitute.nvim',
+        config = require 'config.substitute'
+    },
 
-        -- Faster startup
-        use {
-            'lewis6991/impatient.nvim',
-            config = function()
-                require 'impatient'
-            end
-        }
+    -- Tabs don't share buffers
+    {
+        'tiagovla/scope.nvim',
+        config = true
+    },
 
-        -- One click substitute
-        use {
-            'gbprod/substitute.nvim',
-            config = require 'config.substitute'
-        }
+    -- Save and load session functionality
+    {
+        'rmagatti/auto-session',
+        config = require 'config.session'
+    },
 
-        -- Tabs don't share buffers
-        use {
-            'tiagovla/scope.nvim',
-            config = function()
-                require('scope').setup()
-            end
-        }
+    -- Greeting screen
+    {
+        'goolord/alpha-nvim',
+        config = require 'config.alpha'
+    },
 
-        -- Save and load session functionality
-        use {
-            'rmagatti/auto-session',
-            config = require 'config.session'
-        }
+    -- Auto install lsp servers
+    {
+        'williamboman/mason.nvim',
+        dependencies = { 'williamboman/mason-lspconfig.nvim' },
+        build = ':MasonUpdate',
+        config = require 'config.mason'
+    },
 
-        -- Greeting screen
-        use {
-            'goolord/alpha-nvim',
-            config = require 'config.alpha'
-        }
+    -- Completion plugin
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'L3MON4D3/LuaSnip',
+            'rafamadriz/friendly-snippets',
+            'saadparwaiz1/cmp_luasnip',
+            'onsails/lspkind.nvim',
+            { 'tzachar/cmp-tabnine', build = './install.sh' },
+        },
+        config = require 'config.cmp'
+    },
 
-        -- Auto install lsp servers
-        use {
-            'williamboman/mason.nvim',
-            requires = {
-                'williamboman/mason-lspconfig.nvim',
-            },
-            run = ':MasonUpdate',
-            config = require 'config.mason'
-        }
+    -- LSP config
+    {
+        'neovim/nvim-lspconfig',
+        config = require 'config.lspconfig'
+    },
 
-        -- Vim config completions
-        use { 'folke/neodev.nvim' }
+    -- Show functions signatures
+    {
+        'ray-x/lsp_signature.nvim',
+        dependencies = { 'neovim/nvim-lspconfig' },
+        config = true
+    },
 
-        -- AI completions
-        use {
-            'tzachar/cmp-tabnine',
-            run='./install.sh',
-            requires = {
-                'hrsh7th/nvim-cmp',
-            }
-        }
+    -- Git integration
+    { 'tpope/vim-fugitive' },
 
-        -- Completion plugin
-        use {
-            'hrsh7th/nvim-cmp',
-            after = 'cmp-tabnine',
-            requires = {
-                'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-buffer',
-                'hrsh7th/cmp-path',
-                'hrsh7th/cmp-cmdline',
-                'L3MON4D3/LuaSnip',
-                'rafamadriz/friendly-snippets',
-                'saadparwaiz1/cmp_luasnip',
-                'onsails/lspkind.nvim',
-            },
-            config = require 'config.cmp'
-        }
+    {
+        'lewis6991/gitsigns.nvim',
+        config = require 'config.gitsigns'
+    },
 
-        -- LSP config
-        use {
-            'neovim/nvim-lspconfig',
-            after = {
-                'mason.nvim',
-                'nvim-cmp',
-            },
-            config = require 'config.lspconfig'
-        }
+    -- Status line
+    {
+        'nvim-lualine/lualine.nvim',
+        config = require 'config.lualine'
+    },
 
-        -- Git integration
+    -- Switch between buffers
+    {
+        'akinsho/bufferline.nvim',
+        config = require 'config.bufferline'
+    },
 
-        use { 'tpope/vim-fugitive' }
+    -- Visual indents
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        config = require 'config.indent'
+    },
 
-        use {
-            'lewis6991/gitsigns.nvim',
-            after = 'vim-fugitive',
-            requires = { 'nvim-lua/plenary.nvim' },
-            config = require 'config.gitsigns'
-        }
+    -- Use local .editorconfig files
+    { 'gpanders/editorconfig.nvim', },
 
-        -- Files and directories tree
-        use {
-            'nvim-tree/nvim-tree.lua',
-            requires = {
-                'nvim-tree/nvim-web-devicons'
-            },
-            tag = 'nightly',
-            config = require 'config.tree'
-        }
+    ---------------------------- Lazy plugins -----------------------------
 
-        ---------------------------- Lazy plugins -----------------------------
+    -- Nerd font icons
+    { 'nvim-tree/nvim-web-devicons', lazy = true },
 
-        use {
-            'glepnir/lspsaga.nvim',
-            event = 'LspAttach',
-            branch = 'main',
-            requires = {
-                'nvim-tree/nvim-web-devicons',
-            },
-            config = function()
-                require('lspsaga').setup {}
-            end
-        }
+    -- Plenary
+    { 'nvim-lua/plenary.nvim', lazy = true },
 
-        -- Fuzzy search
-        use {
-            'nvim-telescope/telescope.nvim',
-            cmd = 'Telescope',
-            config = require 'config.telescope'
-        }
+    -- Vim config completions
+    { 'folke/neodev.nvim', lazy = true },
 
-        -- Terminal
-        use {
-            'akinsho/toggleterm.nvim',
-            tag = 'v2.*',
-            cmd = 'ToggleTerm',
-            config = require 'config.toggleterm'
-        }
+    -- Files and directories tree
+    {
+        'nvim-tree/nvim-tree.lua',
+        lazy = true,
+        cmd = 'NvimTreeFocus',
+        config = require 'config.tree'
+    },
 
-        -- Theme
-        use {
-            'catppuccin/nvim',
-            as = 'theme',
-            event = 'UIEnter',
-            config = require 'config.theme'
-        }
+    -- Treesitter syntax highlighting
+    {
+        'nvim-treesitter/nvim-treesitter',
+        lazy = true,
+        event = 'BufRead',
+        dependencies = {
+            'HiPhish/nvim-ts-rainbow2',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        },
+        build = ':TSUpdate',
+        config = require 'config.treesitter'
+    },
 
-        -- Better LSP experience for C/C++
-        use {
-            'p00f/clangd_extensions.nvim',
-            after = 'nvim-lspconfig',
-            ft = { 'c', 'cpp', 'h' },
-            config = require 'config.clangd_extensions'
-        }
+    -- Extra lsp features
+    {
+        'glepnir/lspsaga.nvim',
+        lazy = true,
+        event = 'LspAttach',
+        config = true
+    },
 
-        -- Status line
-        use {
-            'nvim-lualine/lualine.nvim',
-            after = 'theme',
-            requires = { 'nvim-tree/nvim-web-devicons' },
-            config = require 'config.lualine'
-        }
+    -- Fuzzy search
+    {
+        'nvim-telescope/telescope.nvim',
+        lazy = true,
+        cmd = 'Telescope',
+        config = require 'config.telescope'
+    },
 
-        -- Show functions signatures
-        use {
-            'ray-x/lsp_signature.nvim',
-            after = 'nvim-lspconfig',
-            config = function()
-                require('lsp_signature').setup {}
-            end
-        }
+    -- Terminal
+    {
+        'akinsho/toggleterm.nvim',
+        lazy = true,
+        cmd = 'ToggleTerm',
+        config = require 'config.toggleterm'
+    },
 
-        -- Visual indents
-        use {
-            'lukas-reineke/indent-blankline.nvim',
-            after = 'theme',
-            config = require 'config.indent'
-        }
+    -- Better LSP experience for C/C++
+    {
+        'p00f/clangd_extensions.nvim',
+        lazy = true,
+        dependencies = { 'neovim/nvim-lspconfig' },
+        ft = { 'c', 'cpp', 'h' },
+        config = require 'config.clangd_extensions'
+    },
 
-        -- Treesitter syntax highlighting
-        use {
-            'nvim-treesitter/nvim-treesitter',
-            requires = {
-                'HiPhish/nvim-ts-rainbow2',
-                'nvim-treesitter/nvim-treesitter-textobjects',
-            },
-            run = ':TSUpdate',
-            config = require 'config.treesitter'
-        }
-
-        -- Switch between buffers
-        use {
-            'akinsho/bufferline.nvim',
-            tag = 'v3.*',
-            after = 'theme',
-            config = require 'config.bufferline'
-        }
-
-        -- Comment/uncomment commands
-        use {
-            'numToStr/Comment.nvim',
-            event = 'BufRead',
-            config = function()
-                require('Comment').setup()
-            end
-        }
-
-        if packer_bootstrap then
-            require('packer').sync()
-        end
-    end,
-    config = {
-        display = {
-            open_fn = function ()
-                return require('packer.util').float({ border = 'single' })
-            end,
-            prompt_border = 'single',
-        }
-    }
-}
-
+    -- Comment/uncomment commands
+    {
+        'numToStr/Comment.nvim',
+        lazy = true,
+        event = 'BufRead',
+        config = true
+    },
+}, {
+    ui = {
+        border = 'single',
+    },
+})

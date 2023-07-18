@@ -1,5 +1,9 @@
 return function ()
-    require('mason').setup()
+    require('mason').setup {
+        ui = {
+            border = 'single',
+        }
+    }
 
     local lsp = require('lsp')
 
