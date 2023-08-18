@@ -112,8 +112,12 @@ require('lazy').setup({
 
     -- Switch between buffers
     {
-        'akinsho/bufferline.nvim',
-        config = require 'config.bufferline'
+        "willothy/nvim-cokeline",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = require 'config.cokeline'
     },
 
     -- Visual indents
