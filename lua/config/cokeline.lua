@@ -26,7 +26,7 @@ return function()
                 fg = function(buffer) return buffer.devicon.color end,
             },
             {
-                text = function(buffer) return buffer.filename .. '    ' end,
+                text = function(buffer) return buffer.unique_prefix .. buffer.filename .. '    ' end,
                 style = function(buffer) return buffer.is_focused and 'bold' or nil end,
             },
             {
@@ -43,4 +43,6 @@ return function()
             },
         },
     }
+
+    require('history').setup()
 end

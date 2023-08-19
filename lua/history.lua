@@ -2,6 +2,107 @@ local module = {}
 
 local utils = require('utils')
 
+local history = {
+    stack = {},
+    bufs = {},
+    size = 5,
+}
+
+function history:push(bufnr)
+    local index = self.bufs[bufnr]
+    if index == nil then
+        table.insert(self.stack, bufnr)
+        self.bufs[bufnr] = #self.stack
+        if #self.stack > self:capacity() then
+            self:pop()
+        end
+    else
+        for i=index,#self.stack - 1 do
+            self.stack[i] = self.stack[i + 1]
+            self.bufs[self.stack[i]] = i
+        end
+        self.stack[#self.stack] = bufnr
+        self.bufs[bufnr] = #self.stack
+    end
+end
+
+function history:pop()
+    if self:is_empty() then
+        return nil
+    end
+
+    self.bufs[self.stack[1]] = nil
+    for i=1,#self.stack - 1 do
+        self.stack[i] = self.stack[i + 1]
+        self.bufs[self.stack[i]] = i
+    end
+
+    local bufnr = table.remove(self.stack, #self.stack)
+    return require('cokeline.buffers').get_buffer(bufnr)
+end
+
+function history:pop_last()
+    if self:is_empty() then
+        return nil
+    end
+
+    self.bufs[self.stack[#self.stack]] = nil
+
+    local bufnr = table.remove(self.stack, #self.stack)
+    return require('cokeline.buffers').get_buffer(bufnr)
+end
+
+
+function history:list()
+    local list = {}
+    for buf in self:iter() do
+        table.insert(list, buf)
+    end
+    return list
+end
+
+function history:iter()
+    local i = #self.stack
+    return function()
+        if i == 0 then
+            return nil
+        end
+
+        local ret = self:get(i)
+        i = i - 1
+        return ret
+    end
+end
+
+function history:get(idx)
+    return require('cokeline.buffers').get_buffer(self.stack[idx])
+end
+
+function history:last()
+    return self:get(#self.stack)
+end
+
+function history:capacity()
+    return self.size
+end
+
+function history:len()
+    return #self.stack
+end
+
+function history:is_empty()
+    return #self.stack == 0
+end
+
+function history:contains(bufnr)
+    return self.bufs[bufnr] ~= nil
+end
+
+function module.setup()
+    history.size = _G.cokeline.history:capacity()
+    _G.cokeline.history = history
+end
+
 function module.show_popup()
     local history_bufs = _G.cokeline.history:list()
     local history_lines = {}
@@ -32,7 +133,7 @@ function module.show_popup()
 end
 
 function module.go_back()
-    local buf = _G.cokeline.history:last()
+    local buf = _G.cokeline.history:pop_last()
     if buf then
         buf:focus()
     end
