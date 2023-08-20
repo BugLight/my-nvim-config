@@ -201,6 +201,14 @@ require('lazy').setup({
         event = 'BufRead',
         config = true
     },
+
+    -- Virtual color column
+    {
+        'lukas-reineke/virt-column.nvim',
+        lazy = true,
+        event = 'BufRead',
+        config = true
+    },
 }, {
     ui = {
         border = 'single',
