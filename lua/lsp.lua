@@ -29,6 +29,7 @@ module.server_settings = {
     'vuels',
     'rust_analyzer',
     'lua_ls',
+    'clangd',
 }
 
 module.server_names = {}
