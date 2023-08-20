@@ -19,19 +19,23 @@ return function()
         components = {
             {
                 text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
-                fg = get_hex('Normal', 'fg')
+                fg = get_hex('Normal', 'fg'),
             },
             {
                 text = function(buffer) return '    ' .. buffer.devicon.icon end,
                 fg = function(buffer) return buffer.devicon.color end,
             },
             {
-                text = function(buffer) return buffer.unique_prefix .. buffer.filename .. '    ' end,
-                style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+                text = function(buffer) return buffer.unique_prefix .. buffer.filename end,
+                bold = function(buffer) return buffer.is_focused end,
+                italic = function(buffer) return buffer.is_modified end,
             },
             {
-                text = '  ',
+                text = function(buffer) return buffer.is_modified and '*' or '' end,
             },
+            {
+                text = '    ',
+            }
         },
         sidebar = {
             filetype = 'NvimTree',
