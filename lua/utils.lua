@@ -5,7 +5,7 @@ function module.popup(title, lines, options)
         width = 50,
         height = 10,
         zindex = 99,
-        border = 'single',
+        border = 'rounded',
     }
     if options then
         for k, v in pairs(defaults) do

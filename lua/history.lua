@@ -114,6 +114,8 @@ function module.show_popup()
     local win = utils.popup('Buffers history', history_lines)
     local win_buf = vim.api.nvim_win_get_buf(win)
 
+    vim.api.nvim_win_set_option(win, 'cursorline', true)
+
     utils.buf_set_keymap(win_buf, 'n', '<Esc>', function()
         vim.api.nvim_win_close(win, true)
     end)

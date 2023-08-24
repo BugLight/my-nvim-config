@@ -211,6 +211,6 @@ require('lazy').setup({
     },
 }, {
     ui = {
-        border = 'single',
+        border = 'rounded',
     },
 })
