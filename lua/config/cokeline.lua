@@ -3,6 +3,13 @@ return function()
     local is_picking_focus = require('cokeline.mappings').is_picking_focus
     local is_picking_close = require('cokeline.mappings').is_picking_close
 
+    local prev_buffer = function(buffer)
+        if buffer.index == 1 then
+            return nil
+        end
+        return _G.cokeline.visible_buffers[buffer.index - 1]
+    end
+
     require('cokeline').setup {
         buffers = {
             filter_valid = function(buffer)
@@ -35,8 +42,32 @@ return function()
         },
         components = {
             {
-                text = '▏',
-                fg = get_hex('Normal', 'fg'),
+                text = function(buffer)
+                    if buffer.is_focused then
+                        return ' '
+                    elseif buffer.index > 1
+                           and prev_buffer(buffer).is_focused then
+                        return ' '
+                    end
+                    return ' '
+                end,
+                fg = function(buffer)
+                    if buffer.is_focused or buffer.index > 1
+                       and prev_buffer(buffer).is_focused then
+                        return get_hex('Pmenu', 'bg')
+                    end
+                    return get_hex('Normal', 'fg')
+                end,
+                bg = function(buffer)
+                    if buffer.is_focused or buffer.index > 1
+                       and prev_buffer(buffer).is_focused then
+                        return get_hex('Normal', 'bg')
+                    end
+                    return get_hex('Pmenu', 'bg')
+                end
+            },
+            {
+                text = ' ',
             },
             {
                 text = function(buffer)
