@@ -36,11 +36,6 @@ vim.g.maplocalleader = ' '
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,' ..
                        'winpos,terminal,localoptions'
 
-------------------------------- Highlights -----------------------------------
-
-vim.cmd.hi('clear', 'NormalFloat')
-vim.cmd.hi('link', 'NormalFloat', 'Normal')
-
 --------------------------- Neovide GUI options ------------------------------
 
 vim.o.guifont = 'mononoki Nerd Font:h16'
