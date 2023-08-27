@@ -112,10 +112,10 @@ require('lazy').setup({
 
     -- Switch between buffers
     {
-        "willothy/nvim-cokeline",
+        'willothy/nvim-cokeline',
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
+            'nvim-lua/plenary.nvim',
+            'nvim-tree/nvim-web-devicons',
         },
         config = require 'config.cokeline'
     },
@@ -163,10 +163,10 @@ require('lazy').setup({
 
     -- Extra lsp features
     {
-        'glepnir/lspsaga.nvim',
+        'nvimdev/lspsaga.nvim',
         lazy = true,
         event = 'LspAttach',
-        config = true
+        config = require 'config.lspsaga'
     },
 
     -- Fuzzy search

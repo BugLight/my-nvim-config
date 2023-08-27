@@ -6,9 +6,10 @@ map('', '<C-w>n', '<CMD>NvimTreeFocus<CR>', { noremap = true, silent = true })
 -- telescope
 map('', '<leader>ff', '<CMD>Telescope find_files<CR>', { noremap = true, silent = true })
 map('', '<leader>fg', '<CMD>Telescope live_grep<CR>', { noremap = true, silent = true })
+map('', '<leader>fs', '<CMD>Telescope lsp_dynamic_workspace_symbols<CR>', { noremap = true, silent = true })
 
 -- toggleterm
-map('', '<C-t>', '<CMD>ToggleTerm<CR>', { noremap = true, silent = true })
+map('', '<C-`>', '<CMD>ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- substitute
 map('n', 's', '<CMD>lua require(\'substitute\').operator()<CR>', { noremap = true, silent = true })
@@ -16,20 +17,31 @@ map('n', 'ss', '<CMD>lua require(\'substitute\').line()<CR>', { noremap = true, 
 map('n', 'S', '<CMD>lua require(\'substitute\').eol()<CR>', { noremap = true, silent = true })
 map('x', 's', '<CMD>lua require(\'substitute\').visual()<CR>', { noremap = true, silent = true })
 
--- lspsaga
-map('n', 'gh', '<CMD>Lspsaga lsp_finder<CR>')
+-- LSP mappings
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspMappings', {}),
+    callback = function(e)
+        local opts = { buffer = e.buf }
 
-map('n', 'gd', '<CMD>Lspsaga goto_definition<CR>')
-map('n', '<leader>gd', '<CMD>Lspsaga peek_definition<CR>')
+        map('n', '<C-}>', '<CMD>Lspsaga peek_definition<CR>', opts)
+        map('n', '<C-]>', '<CMD>Lspsaga goto_definition<CR>', opts)
+        map('n', 'gd', '<CMD>Lspsaga goto_definition<CR>', opts)
+        map('n', 'gD', '<CMD>Lspsaga goto_type_definition<CR>', opts)
 
-map('n', 'K', '<CMD>Lspsaga hover_doc<CR>')
+        map('n', 'gi', '<CMD>Lspsaga incoming_calls<CR>', opts)
+        map('n', 'go', '<CMD>Lspsaga outgoing_calls<CR>', opts)
 
-map('n', '<leader>ca', '<CMD>Lspsaga code_action<CR>')
+        map('n', 'K', '<CMD>Lspsaga hover_doc<CR>', opts)
 
-map({ 'n', 'v' }, '<leader>r', '<CMD>Lspsaga rename<CR>')
+        map({ 'n', 'v' }, '<leader>r', '<CMD>Lspsaga rename<CR>', opts)
+        map({ 'n', 'v' }, '<leader>ca', '<CMD>Lspsaga code_action<CR>', opts)
 
-map('n', '[e', '<CMD>Lspsaga diagnostic_jump_prev<CR>')
-map('n', ']e', '<CMD>Lspsaga diagnostic_jump_next<CR>')
+        map('n', '[e', '<CMD>Lspsaga diagnostic_jump_prev<CR>', opts)
+        map('n', ']e', '<CMD>Lspsaga diagnostic_jump_next<CR>', opts)
+
+        map('n', 'gO', '<CMD>Lspsaga outline<CR>', opts)
+    end
+})
 
 -- paster (https://github.com/BugLight/paster)
 map('v', 'P', '<CMD>w !paster<CR>')
