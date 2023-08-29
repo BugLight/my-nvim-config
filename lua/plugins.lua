@@ -18,7 +18,7 @@ for _, plugin in pairs(disabled_builtins) do
 end
 
 require('lazy').setup({
-    -------------------------- Required plugins ---------------------------
+    -------------------------- Required plugins -------------------------------
 
     -- Theme
     {
@@ -113,10 +113,6 @@ require('lazy').setup({
     -- Switch between buffers
     {
         'willothy/nvim-cokeline',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-tree/nvim-web-devicons',
-        },
         config = require 'config.cokeline'
     },
 
@@ -129,7 +125,7 @@ require('lazy').setup({
     -- Use local .editorconfig files
     { 'gpanders/editorconfig.nvim', },
 
-    ---------------------------- Lazy plugins -----------------------------
+    ---------------------------- Lazy plugins ---------------------------------
 
     -- Nerd font icons
     { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -207,6 +203,17 @@ require('lazy').setup({
         'lukas-reineke/virt-column.nvim',
         lazy = true,
         event = 'BufRead',
+        config = true
+    },
+
+    -- Which key
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 500
+        end,
         config = true
     },
 }, {

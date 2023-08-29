@@ -31,10 +31,16 @@ return function ()
                 type = 'padding',
                 val = 1,
             },
-            dashboard.button('<leader>n', '  New File', ':enew | NvimTreeFocus<CR>'),
-            dashboard.button('<leader>o', '  Old Files', ':Telescope oldfiles<CR>'),
-            dashboard.button('<leader>ff', '  Find File', ':Telescope find_files<CR>'),
-            dashboard.button('<leader>fg', '  Live Grep', ':Telescope live_grep<CR>'),
+            dashboard.button('<leader>n', '  New File',
+                             ':enew | NvimTreeFocus<CR>',
+                             { desc = 'New file' }),
+            dashboard.button('<leader>o', '  Old Files',
+                             ':Telescope oldfiles<CR>',
+                             { desc = 'Old files' }),
+            dashboard.button('<leader>ff', '  Find File',
+                             ':Telescope find_files<CR>'),
+            dashboard.button('<leader>fg', '  Find in files',
+                             ':Telescope live_grep<CR>'),
         }
     }
 
@@ -76,7 +82,8 @@ return function ()
                     opts = {
                         keymap = { 'n', sc, ':SessionRestoreFromFile ' ..
                                    session_path .. '<CR>:NvimTreeFocus<CR>',
-                                   {} },
+                                   { desc = 'Restore session ' ..
+                                            session.display_name } },
                         position = 'center',
                         width = 80,
                         shortcut = sc,
