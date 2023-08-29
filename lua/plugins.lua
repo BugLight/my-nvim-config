@@ -78,7 +78,6 @@ require('lazy').setup({
             'rafamadriz/friendly-snippets',
             'saadparwaiz1/cmp_luasnip',
             'onsails/lspkind.nvim',
-            { 'tzachar/cmp-tabnine', build = './install.sh' },
         },
         config = require 'config.cmp'
     },
@@ -204,6 +203,16 @@ require('lazy').setup({
         lazy = true,
         event = 'BufRead',
         config = true
+    },
+
+    -- Codeium AI completion
+    {
+        'Exafunction/codeium.vim',
+        lazy = true,
+        event = 'BufRead',
+        init = function()
+            vim.g.codeium_disable_bindings = 1
+        end
     },
 
     -- Which key

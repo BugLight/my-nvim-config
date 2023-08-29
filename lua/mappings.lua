@@ -94,3 +94,12 @@ map('n', '<leader>gl', '<CMD>vertical rightbelow Git log<CR>', 'Git log')
 map('n', '<leader>gc', '<CMD>Git commit<CR>', 'Git commit')
 map('n', '<leader>gb', '<CMD>Git blame<CR>', 'Git blame')
 
+-- Codeium
+map('i', '<C-j>', function() return vim.fn['codeium#CycleCompletions'](1) end,
+    'Next codeium completion', { expr = true })
+map('i', '<C-k>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
+    'Previous codeium completion', { expr = true })
+map('i', '<C-g>', function() return vim.fn['codeium#Accept']() end,
+    'Accept codeium completion', { expr = true })
+map('i', '<C-a>', function() return vim.fn['codeium#Clear']() end,
+    'Abort codeium completion', { expr = true })
