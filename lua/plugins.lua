@@ -48,7 +48,7 @@ require('lazy').setup({
 
     -- Save and load session functionality
     {
-        'rmagatti/auto-session',
+        'BugLight/auto-session',
         config = require 'config.session'
     },
 

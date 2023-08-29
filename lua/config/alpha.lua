@@ -64,7 +64,7 @@ return function ()
                 if i > 5 then
                     break
                 end
-                local sc = '<leader>l' .. tostring(i)
+                local sc = '<leader>' .. tostring(i)
                 local session_path = sessions_root .. session.path
                 table.insert(val, {
                     type = 'button',
@@ -74,7 +74,9 @@ return function ()
                         require('nvim-tree.api').tree.open()
                     end,
                     opts = {
-                        keymap = { 'n', sc, ':RestoreSession ' .. session_path .. '<CR>', {} },
+                        keymap = { 'n', sc, ':SessionRestoreFromFile ' ..
+                                   session_path .. '<CR>:NvimTreeFocus<CR>',
+                                   {} },
                         position = 'center',
                         width = 80,
                         shortcut = sc,
