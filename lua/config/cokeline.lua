@@ -40,6 +40,7 @@ return function()
                     or get_hex('Pmenu', 'bg')
             end
         },
+        fill_hl = 'Pmenu',
         components = {
             {
                 text = function(buffer)
@@ -99,7 +100,16 @@ return function()
                 italic = true
             },
             {
-                text = '    ',
+                text = '   ',
+            },
+            {
+                text = function(buffer)
+                    return (buffer.is_last and buffer.is_focused)
+                        and ' '
+                        or ''
+                end,
+                fg = get_hex('Normal', 'bg'),
+                bg = get_hex('Pmenu', 'bg')
             }
         },
         sidebar = {
