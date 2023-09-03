@@ -26,6 +26,20 @@ map('n', 'ss', require('substitute').line, '')
 map('n', 'S', require('substitute').eol, '')
 map('x', 's', require('substitute').visual, '')
 
+-- Filetype mappings
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = vim.api.nvim_create_augroup('UserFileTypeMappings', {}),
+    callback = function(e)
+        local opts = { buffer = e.buf }
+        local filetype = vim.bo.filetype
+
+        if filetype == 'cpp' then
+            map('n', 'gh', '<CMD>e %:r.h<CR>', 'Go to header file', opts)
+            map('n', 'gs', '<CMD>e %:r.cpp<CR>', 'Go to source file', opts)
+        end
+    end
+})
+
 -- LSP mappings
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspMappings', {}),
