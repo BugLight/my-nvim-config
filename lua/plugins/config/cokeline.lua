@@ -1,5 +1,5 @@
 return function()
-    local get_hex = require('cokeline.utils').get_hex
+    local get_hex = require('cokeline.hlgroups').get_hl_attr
     local is_picking_focus = require('cokeline.mappings').is_picking_focus
     local is_picking_close = require('cokeline.mappings').is_picking_close
 
@@ -7,7 +7,7 @@ return function()
         if buffer.index == 1 then
             return nil
         end
-        return _G.cokeline.visible_buffers[buffer.index - 1]
+        return require('cokeline.buffers').get_visible()[buffer.index - 1]
     end
 
     require('cokeline').setup {

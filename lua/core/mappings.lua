@@ -95,10 +95,10 @@ map('n', '<C-j>', '<Plug>(cokeline-focus-next)', 'Focus next buffer',
     { noremap = false })
 map('n', '<C-k>', '<Plug>(cokeline-focus-prev)', 'Focus previous buffer',
     { noremap = false })
-map('n', '<C-l>', require('buglight.history').go_back,
-    'Go to previous buffer in history')
-map('n', '<C-h>', require('buglight.history').show_popup,
-    'Show buffer history')
+-- map('n', '<C-l>', require('buglight.history').go_back,
+--     'Go to previous buffer in history')
+-- map('n', '<C-h>', require('buglight.history').show_popup,
+--     'Show buffer history')
 for i = 1,9 do
     map('n', ('<leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i),
         'Focus buffer ' .. i, { noremap = false })

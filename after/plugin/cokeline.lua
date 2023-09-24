@@ -1,1 +1,1 @@
-require('buglight.history').setup()
+-- require('buglight.history').setup()
