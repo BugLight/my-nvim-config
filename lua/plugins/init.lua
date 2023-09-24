@@ -149,7 +149,7 @@ require('lazy').setup({
         lazy = true,
         event = 'BufRead',
         dependencies = {
-            'HiPhish/nvim-ts-rainbow2',
+            'HiPhish/rainbow-delimiters.nvim',
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ':TSUpdate',
