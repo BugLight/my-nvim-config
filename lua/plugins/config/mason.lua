@@ -5,7 +5,7 @@ return function ()
         }
     }
 
-    local lsp = require('lsp')
+    local lsp = require('core.lsp')
 
     require('mason-lspconfig').setup {
         ensure_installed = lsp.server_names,

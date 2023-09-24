@@ -1,6 +1,4 @@
-require 'options'
-require 'mappings'
+require 'core.options'
+require 'core.mappings'
+require 'core.autocmds'
 require 'plugins'
-
--- My own plugins
-require('whitespaces').setup()

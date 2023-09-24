@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-local utils = require('utils')
+local utils = require('core.utils')
 
 local history = {
     stack = {},
@@ -98,12 +98,12 @@ function history:contains(bufnr)
     return self.bufs[bufnr] ~= nil
 end
 
-function module.setup()
+function M.setup()
     history.size = _G.cokeline.history:capacity()
     _G.cokeline.history = history
 end
 
-function module.show_popup()
+function M.show_popup()
     local history_bufs = _G.cokeline.history:list()
     local history_lines = {}
     for i, buf in ipairs(history_bufs) do
@@ -134,12 +134,12 @@ function module.show_popup()
     end
 end
 
-function module.go_back()
+function M.go_back()
     local buf = _G.cokeline.history:pop_last()
     if buf then
         buf:focus()
     end
 end
 
-return module
+return M
 

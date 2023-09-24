@@ -2,7 +2,7 @@ return function ()
     require('neodev').setup {}
 
     local lspconfig = require('lspconfig')
-    local lsp = require('lsp')
+    local lsp = require('core.lsp')
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     for _, server in ipairs(lsp.server_settings) do

@@ -124,6 +124,4 @@ return function()
             },
         },
     }
-
-    require('history').setup()
 end

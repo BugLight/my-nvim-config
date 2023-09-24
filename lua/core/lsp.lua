@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-module.server_settings = {
+M.server_settings = {
     {
         'cmake',
         {
@@ -32,14 +32,14 @@ module.server_settings = {
     'clangd',
 }
 
-module.server_names = {}
+M.server_names = {}
 
-for _, server in ipairs(module.server_settings) do
+for _, server in ipairs(M.server_settings) do
     if type(server) == 'table' then
         server = server[1]
     end
-    table.insert(module.server_names, server)
+    table.insert(M.server_names, server)
 end
 
-return module
+return M
 

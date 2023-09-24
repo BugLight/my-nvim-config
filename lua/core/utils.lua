@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-function module.popup(title, lines, options)
+function M.popup(title, lines, options)
     local defaults = {
         width = 50,
         height = 10,
@@ -37,7 +37,7 @@ function module.popup(title, lines, options)
     })
 end
 
-function module.buf_set_keymap(buf, mode, lhs, rhs)
+function M.buf_set_keymap(buf, mode, lhs, rhs)
     vim.api.nvim_buf_set_keymap(buf, mode, lhs, '', {
         callback = rhs,
         silent = true,
@@ -45,5 +45,14 @@ function module.buf_set_keymap(buf, mode, lhs, rhs)
     })
 end
 
-return module
+function M.read_lines(path)
+    local lines = {}
+    path = vim.fs.normalize(path)
+    for line in io.lines(path) do
+        table.insert(lines, line)
+    end
+    return lines
+end
+
+return M
 

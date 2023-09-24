@@ -1,0 +1,1 @@
+require('buglight.history').setup()

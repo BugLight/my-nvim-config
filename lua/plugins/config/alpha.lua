@@ -1,19 +1,10 @@
-function read_header_from_file(path)
-    local lines = {}
-    path = vim.fs.normalize(path)
-    for line in io.lines(path) do
-        table.insert(lines, line)
-    end
-    return lines
-end
-
 return function ()
     local alpha = require('alpha')
     local dashboard = require('alpha.themes.dashboard')
 
     local header = {
         type = 'text',
-        val = read_header_from_file('$HOME/.splash'),
+        val = require('core.utils').read_lines('$HOME/.splash'),
         opts = {
             position = 'center',
         }

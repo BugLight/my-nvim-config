@@ -1,44 +1,51 @@
------------------------------ General options --------------------------------
+----------------------------- General options ---------------------------------
 
 vim.o.encoding = 'UTF-8'
 
+-- Disable vi compatibility
 vim.o.compatible = false
 
-vim.o.ignorecase = true
-
+-- Search
 vim.o.hlsearch = true
 vim.o.incsearch = true
+vim.o.smartcase = true
 
+-- Indent
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.autoindent = true
 
+-- Line numbers
 vim.o.number = true
 vim.o.relativenumber = true
 
-vim.o.cc = '80'
+-- Text width
+vim.o.textwidth = 79
+vim.o.cc = '+1'
 
-vim.o.clipboard = 'unnamedplus'
+-- Clipboard
+vim.o.clipboard = 'unnamed,unnamedplus'
 
-vim.o.lazyredraw = true
+-- Appearence
+vim.o.showmode = false
 
+-- Completion
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.wildmode = 'longest,list'
 
+-- Terminal
 vim.o.tgc = true
 vim.o.ttyfast = true
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
+-- Session
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,' ..
                        'winpos,terminal,localoptions'
 
---------------------------- Neovide GUI options ------------------------------
+--------------------------- Neovide GUI options -------------------------------
 
-vim.o.guifont = 'mononoki Nerd Font:h16'
+vim.o.guifont = 'mononoki Nerd Font:h20'
 
 -- Helper function for transparency formatting
 local alpha = function()

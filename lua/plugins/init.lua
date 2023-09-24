@@ -25,19 +25,19 @@ require('lazy').setup({
         'catppuccin/nvim',
         lazy = false,
         priority = 1000,
-        config = require 'config.theme'
+        config = require 'plugins.config.theme'
     },
 
     -- Discord integration
     {
         'andweeb/presence.nvim',
-        config = require 'config.presence'
+        config = require 'plugins.config.presence'
     },
 
     -- One click substitute
     {
         'gbprod/substitute.nvim',
-        config = require 'config.substitute'
+        config = true
     },
 
     -- Tabs don't share buffers
@@ -49,13 +49,13 @@ require('lazy').setup({
     -- Save and load session functionality
     {
         'BugLight/auto-session',
-        config = require 'config.session'
+        config = require 'plugins.config.session'
     },
 
     -- Greeting screen
     {
         'goolord/alpha-nvim',
-        config = require 'config.alpha'
+        config = require 'plugins.config.alpha'
     },
 
     -- Auto install lsp servers
@@ -63,7 +63,7 @@ require('lazy').setup({
         'williamboman/mason.nvim',
         dependencies = { 'williamboman/mason-lspconfig.nvim' },
         build = ':MasonUpdate',
-        config = require 'config.mason'
+        config = require 'plugins.config.mason'
     },
 
     -- Completion plugin
@@ -79,13 +79,13 @@ require('lazy').setup({
             'saadparwaiz1/cmp_luasnip',
             'onsails/lspkind.nvim',
         },
-        config = require 'config.cmp'
+        config = require 'plugins.config.cmp'
     },
 
     -- LSP config
     {
         'neovim/nvim-lspconfig',
-        config = require 'config.lspconfig'
+        config = require 'plugins.config.lspconfig'
     },
 
     -- Show functions signatures
@@ -100,25 +100,25 @@ require('lazy').setup({
 
     {
         'lewis6991/gitsigns.nvim',
-        config = require 'config.gitsigns'
+        config = true
     },
 
     -- Status line
     {
         'nvim-lualine/lualine.nvim',
-        config = require 'config.lualine'
+        config = require 'plugins.config.lualine'
     },
 
     -- Switch between buffers
     {
         'willothy/nvim-cokeline',
-        config = require 'config.cokeline'
+        config = require 'plugins.config.cokeline'
     },
 
     -- Visual indents
     {
         'lukas-reineke/indent-blankline.nvim',
-        config = require 'config.indent'
+        config = require 'plugins.config.indent'
     },
 
     -- Use local .editorconfig files
@@ -140,7 +140,7 @@ require('lazy').setup({
         'nvim-tree/nvim-tree.lua',
         lazy = true,
         cmd = 'NvimTreeFocus',
-        config = require 'config.tree'
+        config = require 'plugins.config.tree'
     },
 
     -- Treesitter syntax highlighting
@@ -153,7 +153,7 @@ require('lazy').setup({
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ':TSUpdate',
-        config = require 'config.treesitter'
+        config = require 'plugins.config.treesitter'
     },
 
     -- Extra lsp features
@@ -161,7 +161,7 @@ require('lazy').setup({
         'nvimdev/lspsaga.nvim',
         lazy = true,
         event = 'LspAttach',
-        config = require 'config.lspsaga'
+        config = require 'plugins.config.lspsaga'
     },
 
     -- Fuzzy search
@@ -169,7 +169,7 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim',
         lazy = true,
         cmd = 'Telescope',
-        config = require 'config.telescope'
+        config = true
     },
 
     -- Terminal
@@ -177,7 +177,7 @@ require('lazy').setup({
         'akinsho/toggleterm.nvim',
         lazy = true,
         cmd = 'ToggleTerm',
-        config = require 'config.toggleterm'
+        config = require 'plugins.config.toggleterm'
     },
 
     -- Better LSP experience for C/C++
@@ -186,7 +186,7 @@ require('lazy').setup({
         lazy = true,
         dependencies = { 'neovim/nvim-lspconfig' },
         ft = { 'c', 'cpp', 'h' },
-        config = require 'config.clangd_extensions'
+        config = require 'plugins.config.clangd_extensions'
     },
 
     -- Comment/uncomment commands
