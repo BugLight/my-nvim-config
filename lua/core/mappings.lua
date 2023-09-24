@@ -24,10 +24,10 @@ map('', '<leader>fs', '<CMD>Telescope lsp_dynamic_workspace_symbols<CR>',
 map('', '<C-`>', '<CMD>ToggleTerm<CR>', 'Toggle terminal tab')
 
 -- substitute
-map('n', 's', require('substitute').operator, '')
-map('n', 'ss', require('substitute').line, '')
-map('n', 'S', require('substitute').eol, '')
-map('x', 's', require('substitute').visual, '')
+map('n', 's', function(opts) require('substitute').operator(opts) end, '')
+map('n', 'ss', function(opts) require('substitute').line(opts) end, '')
+map('n', 'S', function(opts) require('substitute').eol(opts) end, '')
+map('x', 's', function(opts) require('substitute').visual(opts) end, '')
 
 -- Filetype mappings
 vim.api.nvim_create_autocmd('BufEnter', {
