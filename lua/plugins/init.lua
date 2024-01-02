@@ -22,7 +22,7 @@ require('lazy').setup({
 
     -- Theme
     {
-        'catppuccin/nvim',
+        'ribru17/bamboo.nvim',
         lazy = false,
         priority = 1000,
         config = require 'plugins.config.theme'

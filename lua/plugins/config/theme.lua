@@ -1,5 +1,9 @@
 return function ()
-    vim.cmd.colorscheme('catppuccin-mocha')
+    local bamboo = require('bamboo')
+    bamboo.setup {
+        transparent = true,
+    }
+    bamboo.load()
 
     -- Highlights
     vim.cmd.hi('clear', 'NormalFloat')

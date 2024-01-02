@@ -31,40 +31,40 @@ return function()
         default_hl = {
             fg = function(buffer)
                 return buffer.is_focused
-                    and get_hex('Normal', 'fg')
-                    or get_hex('Pmenu', 'fg')
+                    and get_hex('TabLineSel', 'fg')
+                    or get_hex('TabLine', 'fg')
             end,
             bg = function(buffer)
                 return buffer.is_focused
-                    and get_hex('Normal', 'bg')
-                    or get_hex('Pmenu', 'bg')
+                    and get_hex('TabLineSel', 'bg')
+                    or get_hex('TabLine', 'bg')
             end
         },
-        fill_hl = 'Pmenu',
+        fill_hl = 'TabLineFill',
         components = {
             {
                 text = function(buffer)
                     if buffer.is_focused then
-                        return ' '
+                        return ''
                     elseif buffer.index > 1
                            and prev_buffer(buffer).is_focused then
-                        return ' '
+                        return ''
                     end
-                    return ' '
+                    return ''
                 end,
                 fg = function(buffer)
                     if buffer.is_focused or buffer.index > 1
                        and prev_buffer(buffer).is_focused then
-                        return get_hex('Pmenu', 'bg')
+                        return get_hex('TabLine', 'bg')
                     end
-                    return get_hex('Normal', 'fg')
+                    return get_hex('TabLineSel', 'fg')
                 end,
                 bg = function(buffer)
                     if buffer.is_focused or buffer.index > 1
                        and prev_buffer(buffer).is_focused then
-                        return get_hex('Normal', 'bg')
+                        return get_hex('TabLineSel', 'bg')
                     end
-                    return get_hex('Pmenu', 'bg')
+                    return get_hex('TabLine', 'bg')
                 end
             },
             {
@@ -76,10 +76,12 @@ return function()
                         and buffer.pick_letter
                         or buffer.index) .. ':  '
                 end,
-                fg = function()
+                fg = function(buffer)
                     return (is_picking_focus() or is_picking_close())
                         and get_hex('ErrorMsg', 'fg')
-                        or get_hex('Normal', 'fg')
+                        or (buffer.is_focused
+                            and get_hex('TabLineSel', 'fg')
+                            or get_hex('TabLine', 'fg'))
                 end
             },
             {
@@ -105,11 +107,11 @@ return function()
             {
                 text = function(buffer)
                     return (buffer.is_last and buffer.is_focused)
-                        and ' '
+                        and ''
                         or ''
                 end,
-                fg = get_hex('Normal', 'bg'),
-                bg = get_hex('Pmenu', 'bg')
+                fg = get_hex('TabLineSel', 'bg'),
+                bg = get_hex('TabLine', 'bg')
             }
         },
         sidebar = {
@@ -119,7 +121,8 @@ return function()
                     text = function()
                         return vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
                     end,
-                    bg = get_hex('Pmenu', 'bg'),
+                    bg = get_hex('TabLine', 'bg'),
+                    fg = get_hex('TabLine', 'fg')
                 },
             },
         },
