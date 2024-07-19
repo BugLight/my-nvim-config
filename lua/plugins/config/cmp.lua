@@ -46,6 +46,7 @@ return function ()
             { name = 'luasnip' },
             { name = 'buffer' },
             { name = 'path' },
+            { name = 'neorg' },
         }),
         formatting = {
             format = lspkind.cmp_format()

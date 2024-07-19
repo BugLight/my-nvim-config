@@ -129,6 +129,14 @@ require('lazy').setup({
     -- Use local .editorconfig files
     { 'gpanders/editorconfig.nvim', },
 
+    -- Neorg
+    {
+        'nvim-neorg/neorg',
+        lazy = false,
+        version = '*',
+        config = require 'plugins.config.neorg',
+    },
+
     ---------------------------- Lazy plugins ---------------------------------
 
     -- Nerd font icons

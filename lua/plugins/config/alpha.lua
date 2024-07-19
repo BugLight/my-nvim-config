@@ -24,16 +24,17 @@ return function ()
                 type = 'padding',
                 val = 1,
             },
-            dashboard.button('<leader>n', '  New File',
+            dashboard.button('<leader>nf', '  New File',
                              ':enew | NvimTreeFocus<CR>',
                              { desc = 'New file' }),
+            dashboard.button('<leader>nn', '  New Note',
+                             '<Plug>(neorg.dirman.new-note)',
+                             { desc = 'New note' }),
             dashboard.button('<leader>o', '  Old Files',
                              ':Telescope oldfiles<CR>',
                              { desc = 'Old files' }),
             dashboard.button('<leader>ff', '  Find File',
                              ':Telescope find_files<CR>'),
-            dashboard.button('<leader>fg', '  Find in files',
-                             ':Telescope live_grep<CR>'),
         }
     }
 

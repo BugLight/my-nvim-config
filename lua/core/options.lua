@@ -43,6 +43,9 @@ vim.o.ttyfast = true
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,' ..
                        'winpos,terminal,localoptions'
 
+-- Conceal
+vim.o.conceallevel = 2
+
 --------------------------- Neovide GUI options -------------------------------
 
 vim.o.guifont = 'mononoki Nerd Font:h20'
