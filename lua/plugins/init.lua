@@ -118,7 +118,12 @@ require('lazy').setup({
     -- Visual indents
     {
         'lukas-reineke/indent-blankline.nvim',
-        config = require 'plugins.config.indent'
+        main = 'ibl',
+        opts = {
+            exclude = {
+                filetypes = { 'dashboard' }
+            }
+        }
     },
 
     -- Use local .editorconfig files

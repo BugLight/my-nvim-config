@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-First of all install [Neovim](https://github.com/neovim/neovim) (version >= 0.9.1).
+First of all install [Neovim](https://github.com/neovim/neovim) (version >= 0.10.0).
 
 After that clone this repo into your neovim configuration folder.
 
