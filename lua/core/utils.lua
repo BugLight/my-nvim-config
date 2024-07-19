@@ -45,9 +45,25 @@ function M.buf_set_keymap(buf, mode, lhs, rhs)
     })
 end
 
-function M.read_lines(path)
-    local lines = {}
+function M.file_exists(path)
     path = vim.fs.normalize(path)
+
+    if not io.open(path) then
+        return false
+    end
+
+    io.close(path)
+    return true
+end
+
+function M.read_lines(path)
+    path = vim.fs.normalize(path)
+
+    if not M.file_exists(path) then
+        return nil
+    end
+
+    local lines = {}
     for line in io.lines(path) do
         table.insert(lines, line)
     end

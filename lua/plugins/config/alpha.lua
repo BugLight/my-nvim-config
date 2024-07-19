@@ -2,9 +2,11 @@ return function ()
     local alpha = require('alpha')
     local dashboard = require('alpha.themes.dashboard')
 
+    local default_text = {}
+    local custom_text = require('core.utils').read_lines('$HOME/.splash')
     local header = {
         type = 'text',
-        val = require('core.utils').read_lines('$HOME/.splash'),
+        val = custom_text or default_text,
         opts = {
             position = 'center',
         }
