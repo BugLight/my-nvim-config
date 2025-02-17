@@ -47,12 +47,12 @@ end
 
 function M.file_exists(path)
     path = vim.fs.normalize(path)
-
-    if not io.open(path) then
+    local file = io.open(path)
+    if not file then
         return false
     end
 
-    io.close(path)
+    io.close(file)
     return true
 end
 
