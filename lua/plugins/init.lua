@@ -22,7 +22,7 @@ require('lazy').setup({
 
     -- Theme
     {
-        'ribru17/bamboo.nvim',
+        'mellow-theme/mellow.nvim',
         lazy = false,
         priority = 1000,
         config = require 'plugins.config.theme'
