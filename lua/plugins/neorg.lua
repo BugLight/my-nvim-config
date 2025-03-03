@@ -1,12 +1,10 @@
-return function()
-    require('neorg').setup {
+return {
+    'nvim-neorg/neorg',
+    lazy = false,
+    version = '*',
+    opts = {
         load = {
             ['core.defaults'] = {},
-            ['core.completion'] = {
-                config = {
-                    engine = 'nvim-cmp',
-                },
-            },
             ['core.concealer'] = {},
             ['core.dirman'] = {
                 config = {
@@ -16,6 +14,6 @@ return function()
                     default_workspace = 'notes',
                 },
             },
-        }
-    }
-end
+        },
+    },
+}
