@@ -46,14 +46,14 @@ function M.setup()
 
     map('n', 'dd', function()
         if vim.api.nvim_get_current_line():match("^%s*$") then
-             return '"_dd'
+            return '"_dd'
         else
             return 'dd'
         end
     end, 'Smart delete line', { expr = true })
 
-    map({'n', 'x'}, 'x', '"_x')
-    map({'n', 'x'}, 'X', '"_X')
+    map({ 'n', 'x' }, 'x', '"_x')
+    map({ 'n', 'x' }, 'X', '"_X')
 
     map('x', '.', ':norm .<CR>')
     map('x', '@', ':norm @q<CR>')
@@ -64,6 +64,32 @@ function M.setup()
     -- Filetype mappings
     map('n', 'gh', '<CMD>e %:r.h<CR>', 'Go to header file', { ft = 'cpp' })
     map('n', 'gs', '<CMD>e %:r.cpp<CR>', 'Go to source file', { ft = 'cpp' })
+
+    -- LSP mappings
+    autocmd('LspAttach', 'UserLspMappings', function(e)
+        local opts = { buffer = e.buf }
+        local lsp = vim.lsp.get_client_by_id(e.data.client_id)
+
+        if not lsp then
+            vim.notify(
+                'Failed to set LSP mappings: client not found',
+                vim.log.levels.ERROR
+            )
+            return
+        end
+
+        if lsp.supports_method('textDocument/rename') then
+            map('n', 'gr', vim.lsp.buf.rename, 'Rename symbol', opts)
+        end
+
+        if lsp.supports_method('textDocument/definition') then
+            map('n', 'gd', vim.lsp.buf.definition, 'Go to definition', opts)
+        end
+
+        if lsp.supports_method('textDocument/declaration') then
+            map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration', opts)
+        end
+    end)
 end
 
 return M
