@@ -14,6 +14,12 @@ return {
             ['NormalFloat'] = { fg = c.fg, bg = c.none },
             ['FloatBorder'] = { fg = c.white, bg = c.none },
 
+            -- Diff mode
+            ['DiffAdd'] = { fg = c.green, bg = c.none },
+            ['DiffChange'] = { fg = c.yellow, bg = c.none },
+            ['DiffDelete'] = { fg = c.red, bg = c.none },
+            ['DiffText'] = { fg = c.bright_yellow, bold = true },
+
             -- Notify
             ['NotifyERRORBorder'] = { fg = c.red, bg = c.none },
             ['NotifyWARNBorder'] = { fg = c.yellow, bg = c.none },
