@@ -17,7 +17,12 @@
 
         src = ./.;
 
-        buildInputs = [pkgs.git pkgs.neovim];
+        buildInputs = with pkgs; [
+          git
+          python3
+          nodejs
+          neovim
+        ];
 
         nativeBuildInputs = [pkgs.makeWrapper];
 
@@ -25,6 +30,7 @@
           mkdir -p $out/${name}
           cp -rv $src/* $out/${name}
           makeWrapper ${pkgs.neovim}/bin/nvim $out/bin/nvim \
+              --prefix-each PATH : '${pkgs.python3}/bin ${pkgs.nodejs}/bin' \
               --set XDG_CONFIG_HOME $out \
               --set NVIM_APPNAME ${name}
         '';
