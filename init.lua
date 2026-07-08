@@ -3,6 +3,7 @@
 require('core.options').setup()
 require('core.mappings').setup()
 require('core.autocmds').setup()
+require('core.treesitter').setup()
 
 -------------------------------- Setup plugins --------------------------------
 
