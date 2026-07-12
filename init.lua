@@ -1,8 +1,8 @@
 -------------------------- Setup core functionality ---------------------------
 
-require('core.options').setup()
-require('core.mappings').setup()
-require('core.autocmds').setup()
+require('core.options')
+require('core.mappings')
+require('core.autocmds')
 require('core.treesitter').setup()
 
 -------------------------------- Setup plugins --------------------------------
